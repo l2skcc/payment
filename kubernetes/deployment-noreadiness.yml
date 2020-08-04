@@ -16,17 +16,13 @@ spec:
     spec:
       containers:
         - name: payment
+          args:
+          - /bin/sh
+            -c
+            sleep 600;
           image: 496278789073.dkr.ecr.ap-northeast-2.amazonaws.com/ecr-skcc-team2-payment:v1
           ports:
             - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: '/actuator/health'
-              port: 8080
-            initialDelaySeconds: 10
-            timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 10
           livenessProbe:
             httpGet:
               path: '/actuator/health'
